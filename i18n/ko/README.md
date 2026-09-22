@@ -4,6 +4,17 @@
 
 배포 방식: 학생 PC에 공식 설치 파일로 Orange를 설치한 뒤, **같은 버전의 소스로 만든 번역 파일(`.py`, `i18n/*.json`)만 덮어씁니다.** 컴파일된 모듈(`.pyd`)은 건드리지 않으므로 컴파일러가 필요 없습니다. 실제 배포는 언어팩 폴더 안의 `설치.bat`을 더블클릭하는 원스톱 방식입니다(아래 "배포 관련" 참고).
 
+## 다운로드 (동료 교사용)
+
+번역 소스(`.py`, `msgs.jaml`)는 이 저장소에 있지만, 실제로 설치에 쓰는 **완성된 언어팩 zip**과 **공식 설치 파일**은 용량 때문에 Git에 올리지 않고 [GitHub 릴리스](https://github.com/JUNGHWAN12/orange3/releases)에 따로 올려 둡니다.
+
+| 파일 | 다운로드 | 용도 |
+|---|---|---|
+| `orange-ko-3.40.0.zip` | <https://github.com/JUNGHWAN12/orange3/releases/latest/download/orange-ko-3.40.0.zip> | 한글 언어팩 + `설치.bat`(4MB) |
+| `Orange3-3.40.0-x86_64.exe` | <https://github.com/JUNGHWAN12/orange3/releases/latest/download/Orange3-3.40.0-x86_64.exe> | 공식 Orange 설치 파일(387MB, 이미 설치되어 있으면 생략 가능) |
+
+**사용법:** `orange-ko-3.40.0.zip`을 압축 풀고, 그 안에 `Orange3-3.40.0-x86_64.exe`를 함께 넣은 뒤 `설치.bat`을 더블클릭합니다. 자세한 내용은 [배포·테스트 가이드](https://claude.ai/code/artifact/b91ab674-80b0-4cd7-8966-f0fa73a2b4bc)를 참고하세요.
+
 ## 기준 버전
 
 | 패키지 | 버전 | 저장소 위치 | 브랜치 |
