@@ -6,14 +6,16 @@
 
 ## 다운로드 (동료 교사용)
 
-번역 소스(`.py`, `msgs.jaml`)는 이 저장소에 있지만, 실제로 설치에 쓰는 **완성된 언어팩 zip**과 **공식 설치 파일**은 용량 때문에 Git에 올리지 않고 [GitHub 릴리스](https://github.com/JUNGHWAN12/orange3/releases)에 따로 올려 둡니다.
+번역 소스(`.py`, `msgs.jaml`)는 이 저장소에 있지만, 실제로 설치에 쓰는 **완성된 언어팩 zip**은 용량 때문에 Git에 올리지 않고 [GitHub 릴리스](https://github.com/JUNGHWAN12/orange3/releases)에 따로 올려 둡니다. 공식 설치 파일은 GitHub이 `.exe` 첨부를 막아 릴리스에 올리지 못했고, 대신 biolab 공식 사이트 링크를 그대로 씁니다.
 
 | 파일 | 다운로드 | 용도 |
 |---|---|---|
 | `orange-ko-3.40.0.zip` | <https://github.com/JUNGHWAN12/orange3/releases/latest/download/orange-ko-3.40.0.zip> | 한글 언어팩 + `설치.bat`(4MB) |
-| `Orange3-3.40.0-x86_64.exe` | <https://github.com/JUNGHWAN12/orange3/releases/latest/download/Orange3-3.40.0-x86_64.exe> | 공식 Orange 설치 파일(387MB, 이미 설치되어 있으면 생략 가능) |
+| `Orange3-3.40.0-x86_64.exe` | <https://download.biolab.si/download/files/Orange3-3.40.0-x86_64.exe> | 공식 Orange 설치 파일(biolab 공식 사이트, 387MB, 이미 설치되어 있으면 생략 가능) |
 
 **사용법:** `orange-ko-3.40.0.zip`을 압축 풀고, 그 안에 `Orange3-3.40.0-x86_64.exe`를 함께 넣은 뒤 `설치.bat`을 더블클릭합니다. 자세한 내용은 [배포·테스트 가이드](https://claude.ai/code/artifact/b91ab674-80b0-4cd7-8966-f0fa73a2b4bc)를 참고하세요.
+
+⚠️ biolab 다운로드 페이지(<https://orange.biolab.si/download>)는 버전이 올라가면 최신 버전으로 바뀝니다. 위 파일명이 `Orange3-3.40.0-x86_64.exe`가 아니게 되면, 이 언어팩과 버전이 맞지 않는 것이니 받지 마세요.
 
 ## 기준 버전
 
