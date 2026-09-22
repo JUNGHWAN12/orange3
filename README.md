@@ -14,6 +14,15 @@
         <img src="https://img.shields.io/discord/633376992607076354?logo=discord&color=7389D8&logoColor=white&label=Discord">                                                                                                                                                                                                                                                  </a>
 </p>
 
+> ### 🇰🇷 한글패치 안내 (Korean patch)
+> 이 `ko` 브랜치는 [biolab/orange3](https://github.com/biolab/orange3) 공식 저장소를 그대로 가져온 개인 포크에,
+> **수업에서 학생들에게 배포하기 위한 한국어 번역**을 추가한 것입니다. 공식 프로젝트에 기여하는 용도가 아닙니다.
+>
+> - 번역 소스와 배포 도구: [`i18n/ko/`](i18n/ko/)
+> - 사용법과 배포 방법: **[i18n/ko/README.md](i18n/ko/README.md)** 참고
+> - 대상 버전: Orange **3.40.0** (orange-canvas-core 0.2.7, orange-widget-base 4.27.0)
+> - 배포 방식: 공식 설치 파일 + 언어팩 폴더의 `설치.bat` 더블클릭 한 번으로 설치·한글 적용
+
 # Orange Data Mining
 [Orange] is a data mining and visualization toolbox for novice and expert alike. To explore data with Orange, one requires __no programming or in-depth mathematical knowledge__. We believe that workflow-based data science tools democratize data science by hiding complex underlying mechanics and exposing intuitive concepts. Anyone who owns data, or is motivated to peek into data, should have the means to do so.
 
