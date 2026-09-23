@@ -115,8 +115,27 @@ if ($versions -and $versions.Orange3 -eq $RequiredVersion) {
     if (-not (Test-Path $InstallerPath)) {
         Write-Error "Installer not found at '$InstallerPath'. Copy Orange3-$RequiredVersion-x86_64.exe next to this script, or pass -InstallerPath."
     }
-    Write-Host "Installing Orange $RequiredVersion silently to $InstallPath (this takes a few minutes; ~2.5 GB) ..."
-    $proc = Start-Process -FilePath $InstallerPath -ArgumentList "/S", "/D=$InstallPath" -PassThru -Wait
+    Write-Host "Installing Orange $RequiredVersion silently to $InstallPath ..."
+    Write-Host "  (normally 3-10 minutes and about 90,000 files / 2.5 GB - this window will print progress every 10 seconds)"
+    $proc = Start-Process -FilePath $InstallerPath -ArgumentList "/S", "/D=$InstallPath" -PassThru
+    $lastCount = -1
+    $stillCount = 0
+    while (-not $proc.HasExited) {
+        Start-Sleep -Seconds 10
+        $fileCount = 0
+        if (Test-Path $InstallPath) {
+            $fileCount = (Get-ChildItem -LiteralPath $InstallPath -Recurse -File -ErrorAction SilentlyContinue | Measure-Object).Count
+        }
+        if ($fileCount -ne $lastCount) {
+            Write-Host "  ... $fileCount files copied so far"
+            $lastCount = $fileCount
+            $stillCount = 0
+        } else {
+            $stillCount++
+            Write-Host "  ... still at $fileCount files ($($stillCount * 10)s with no change)"
+        }
+    }
+    $proc.WaitForExit()
     if ($proc.ExitCode -ne 0) {
         Write-Error "Installer exited with code $($proc.ExitCode). See $env:TEMP\$(Split-Path $InstallerPath -Leaf)-install-log.txt for details."
     }
@@ -137,12 +156,24 @@ Write-Host "  orange-canvas-core $($versions.'orange-canvas-core'), orange-widge
 }
 
 # ---- apply the Korean language pack (reuses install_ko.ps1) --------------
-$installKo = Join-Path $packDir "install_ko.ps1"
-if (-not (Test-Path $installKo)) {
-    Write-Host "ERROR: install_ko.ps1 not found next to this script in $packDir."
+try {
+    $installKo = Join-Path $packDir "install_ko.ps1"
+    if (-not (Test-Path $installKo)) {
+        throw "install_ko.ps1 not found next to this script in $packDir."
+    }
+    $langArgs = @{ InstallPath = $InstallPath; Elevated = $true }
+    if ($SkipLanguageSwitch) { $langArgs["SkipLanguageSwitch"] = $true }
+    & $installKo @langArgs
+    if ($LASTEXITCODE -and $LASTEXITCODE -ne 0) {
+        throw "install_ko.ps1 exited with code $LASTEXITCODE."
+    }
+} catch {
+    # install_ko.ps1 already pauses on its own (success or failure) via its
+    # own finally block; only pause here for errors it never got to raise,
+    # e.g. the file being missing.
+    Write-Host ""
+    Write-Host "ERROR applying the language pack: $($_.Exception.Message)"
+    Write-Host $_.ScriptStackTrace
     Wait-BeforeExit
     exit 1
 }
-$langArgs = @{ InstallPath = $InstallPath; Elevated = $true }
-if ($SkipLanguageSwitch) { $langArgs["SkipLanguageSwitch"] = $true }
-& $installKo @langArgs
